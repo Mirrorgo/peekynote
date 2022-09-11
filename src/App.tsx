@@ -2,33 +2,66 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/tauri";
 import "./App.css";
+import { getCurrent, WebviewWindow } from "@tauri-apps/api/window";
+import axios from "axios";
+import { mockBingSearchResult, SUBSCRIPTION_KEY } from "./helper/bingSearch";
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
 
+  const bingSearch = async (value: string) => {
+    console.log(mockBingSearchResult.webPages.value.length, "length");
+    // axios.get(`https://api.bing.microsoft.com//v7.0/search?q=${value}`,{
+    //     headers:
+    //     { 'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY }
+    //   }).then((res)=>{
+    //     console.log(res,'res')
+    //   })
+  };
+
   async function greet() {
     setGreetMsg(await invoke("greet", { name }));
   }
 
+  const handleEnterMyApp = () => {
+    const webview = new WebviewWindow("theUniqueLabel", {
+      url: "https://bing.com",
+      width: 375,
+      height: 667,
+      // resizable: false,
+    });
+    webview.once("tauri://created", function () {
+      // webview window successfully created
+      // const customUserAgent =
+      //   "User-Agent: Opera/9.80 (Android 2.3.4; Linux; Opera Mobi/build-1107180945; U; en-GB) Presto/2.8.149 Version/11.10 Android Pad Moto Xoom";
+      // Object.defineProperty(navigator, "userAgent", {
+      //   value: customUserAgent,
+      //   writable: false,
+      // });
+    });
+    webview.once("tauri://error", function (e) {
+      // an error happened creating the webview window
+    });
+  };
+  const [searchInputValue, setSearchInputValue] = useState("");
+
   return (
     <div className="container">
-      <h1>Welcome to Tauri! wow</h1>
-
-      <div className="row">
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h1 onClick={handleEnterMyApp} style={{ cursor: "pointer" }}>
+        Welcome to Tauri!
+      </h1>
+      <input
+        value={searchInputValue}
+        onChange={(e) => setSearchInputValue(e.target.value)}
+      />
+      <div
+        onClick={() => bingSearch(searchInputValue)}
+        style={{ cursor: "pointer" }}
+      >
+        搜索
       </div>
-
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
+      <button onClick={() => {}}>test</button>
       <div className="row">
         <div>
           <input
