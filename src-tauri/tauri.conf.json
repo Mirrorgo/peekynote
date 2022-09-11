@@ -11,10 +11,7 @@
   },
   "tauri": {
     "allowlist": {
-      "all": true,
-      "path": {
-        "all": true
-      }
+      "all": true
     },
     "bundle": {
       "active": true,
@@ -31,7 +28,7 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
-      "identifier": "com.tauri.dev",
+      "identifier": "com.tauri.peekynote",
       "longDescription": "",
       "macOS": {
         "entitlements": null,
