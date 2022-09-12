@@ -13,6 +13,10 @@
     "allowlist": {
       "all": true
     },
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "iconAsTemplate": true
+    },
     "bundle": {
       "active": true,
       "category": "DeveloperTool",
@@ -44,7 +48,6 @@
         "certificateThumbprint": null,
         "digestAlgorithm": "sha256",
         "timestampUrl": ""
-       
       }
     },
     "security": {
@@ -60,7 +63,6 @@
         "resizable": true,
         "title": "peekynote",
         "width": 360
-        
       }
     ]
   }

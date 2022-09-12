@@ -60,6 +60,11 @@ function App() {
         onClick={() => {
           new WebviewWindow("bing", {
             url: "/src/pages/bing/index.html",
+            fullscreen: false,
+            height: 600,
+            resizable: false,
+            title: "bing",
+            width: 360,
           });
         }}
       >
