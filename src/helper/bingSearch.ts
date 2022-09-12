@@ -4,7 +4,8 @@
     //   path:     '/v7.0/search?q=' + encodeURIComponent(query),
     //   headers:  { 'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY },
     // }, res => {
- const SUBSCRIPTION_KEY = '5e4ec03892b14ae9b1ad1141db5385c7'
+//  const SUBSCRIPTION_KEY = '5e4ec03892b14ae9b1ad1141db5385c7'
+ const SUBSCRIPTION_KEY = ''
 
 const mockBingSearchResult = 
 {

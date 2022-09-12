@@ -3,15 +3,15 @@ import reactLogo from "./assets/react.svg";
 import { invoke } from "@tauri-apps/api/tauri";
 import "./App.css";
 import { getCurrent, WebviewWindow } from "@tauri-apps/api/window";
-import axios from "axios";
 import { mockBingSearchResult, SUBSCRIPTION_KEY } from "./helper/bingSearch";
+import { Button } from "@mui/material";
 
 function App() {
   const [greetMsg, setGreetMsg] = useState("");
   const [name, setName] = useState("");
 
   const bingSearch = async (value: string) => {
-    console.log(mockBingSearchResult.webPages.value.length, "length");
+    console.log(mockBingSearchResult.webPages.value, "value");
     // axios.get(`https://api.bing.microsoft.com//v7.0/search?q=${value}`,{
     //     headers:
     //     { 'Ocp-Apim-Subscription-Key': SUBSCRIPTION_KEY }
@@ -55,13 +55,16 @@ function App() {
         value={searchInputValue}
         onChange={(e) => setSearchInputValue(e.target.value)}
       />
-      <div
-        onClick={() => bingSearch(searchInputValue)}
-        style={{ cursor: "pointer" }}
+      <Button onClick={() => bingSearch(searchInputValue)}>搜索</Button>
+      <Button
+        onClick={() => {
+          new WebviewWindow("bing", {
+            url: "/src/pages/bing/index.html",
+          });
+        }}
       >
-        搜索
-      </div>
-      <button onClick={() => {}}>test</button>
+        to bing
+      </Button>
       <div className="row">
         <div>
           <input
